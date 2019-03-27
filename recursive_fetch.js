@@ -21,3 +21,25 @@ function getGloc( repo, tries ) {
 Generally I love this code-base, specially Artem way of commenting he do in PART1, PART2, and documented function signuture.
 Very easy code to read and understond. 
 */
+
+/**
+ * Logger
+ * @param {string} type - info, warn, err
+ * @param {string} str - info for output
+ */
+const log = (type, str) => {
+  switch (type) {
+    case 'i': console.info(APP_NAME + ': ' + str) break
+    case 'w': console.warn(APP_NAME + ': ' + str) break
+    case 'e': console.error(APP_NAME + ': ' + str) break
+    default: console.log(str)
+  }
+}
+
+
+function appendLoc(repoName, element = '') {
+  // call site
+  getGloc(repoName, TRIES_DEFAULT)
+    .then(lines => (element.innerHTML += getBadgeWithLines(lines)))
+    .catch(e => log('e', e))
+}
